@@ -1,4 +1,4 @@
 tradingbook
 ===========
 
-Simple Trading Order Book
+-Simple Trading Order Book
