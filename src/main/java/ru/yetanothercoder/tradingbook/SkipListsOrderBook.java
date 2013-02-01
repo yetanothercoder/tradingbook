@@ -25,7 +25,7 @@ public class SkipListsOrderBook<S> implements OrderBook<S> {
 
     @Override
     public StockTransaction<S> executeOrEnqueue(Stock<S> order) {
-        if (order.side == side) throw new IllegalArgumentException("wrong side!");
+        if (order.side == side) throw new IllegalArgumentException("wrong side");
 
         List<Stock<S>> matchingOrders;
         synchronized (this) {
