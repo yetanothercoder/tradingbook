@@ -10,7 +10,7 @@ import java.util.List;
 public interface OrderBook<S> {
     public StockTransaction<S> executeOrEnqueue(Stock<S> order);
 
-    public List<StockTransaction<S>> executeOrdersFor(Quote<S> newQuote);
+    public List<StockTransaction<S>> executeOrdersOnQuote(Quote<S> newQuote);
 
     public void expire(Stock<S>... expired);
 

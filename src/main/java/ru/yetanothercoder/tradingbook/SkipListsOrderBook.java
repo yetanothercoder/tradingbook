@@ -83,7 +83,7 @@ public class SkipListsOrderBook<S> implements OrderBook<S> {
     }
 
     @Override
-    public List<Stock<S>> executeOrdersFor(Quote newQuote) {
+    public List<Stock<S>> executeOrdersOnQuote(Quote newQuote) {
         
         return null;
     }
