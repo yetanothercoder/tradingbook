@@ -2,6 +2,7 @@
 
 # Package Files #
 .idea
+*.iml
 *.jar
 *.war
 *.ear
