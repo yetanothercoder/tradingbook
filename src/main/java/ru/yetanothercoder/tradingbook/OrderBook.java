@@ -1,12 +1,10 @@
 package ru.yetanothercoder.tradingbook;
 
-import javax.annotation.concurrent.ThreadSafe;
 import java.util.List;
 
 /**
  * @author Mikhail Baturov | www.yetanothercoder.ru
  */
-@ThreadSafe
 public interface OrderBook<S> {
     public StockTransaction<S> executeOrEnqueue(Stock<S> order);
 

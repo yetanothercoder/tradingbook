@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  */
 public class StockExchange {
     public static void main(String[] args) {
-        ForexOrderBook orderBook = new ForexOrderBook();
+        ForexOrderBook orderBook = new ForexOrderBook(Side.BUY);
 
         Forex buy$29_100 = Forex.createBuyOrder(BigDecimal.valueOf(29), 100, Currency.USD);
         Forex buy$28_200 = Forex.createBuyOrder(BigDecimal.valueOf(28), 200, Currency.USD);

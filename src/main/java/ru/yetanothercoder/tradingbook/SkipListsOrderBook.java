@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentSkipListMap;
 public class SkipListsOrderBook<S> implements OrderBook<S> {
 
     private final ConcurrentNavigableMap<BigDecimal, Stock<S>> book =
-            new ConcurrentSkipListMap<BigDecimal, Stock<S>>();
+            new ConcurrentSkipListMap<>();
     private final Side side;
 
     public SkipListsOrderBook(Side side) {
@@ -26,7 +26,7 @@ public class SkipListsOrderBook<S> implements OrderBook<S> {
 
     @Override
     public StockTransaction<S> executeOrEnqueue(Stock<S> order) {
-        if (order.side == side) throw new IllegalArgumentException("wrong side");
+        if (order.side == side) throw new IllegalArgumentException("same side");
 
         List<Stock<S>> matchingOrders;
         synchronized (this) {
@@ -56,7 +56,7 @@ public class SkipListsOrderBook<S> implements OrderBook<S> {
     }
 
     private StockTransaction<S> transact(Stock<S> traded, List<Stock<S>> booked) {
-        List<Stock<S>> transactionOrders = new ArrayList<Stock<S>>(booked.size());
+        List<Stock<S>> transactionOrders = new ArrayList<>(booked.size());
 
         int balance = traded.size;
         BigDecimal profit = new BigDecimal(0);
@@ -80,12 +80,12 @@ public class SkipListsOrderBook<S> implements OrderBook<S> {
                 transactionOrders.add(order);
             }
         }
-        return new StockTransaction<S>(transactionOrders, profit);
+        return new StockTransaction<>(transactionOrders, profit);
     }
 
     @Override
     public List<Stock<S>> executeOrdersOnQuote(Quote newQuote) {
-        
+
         return null;
     }
 
@@ -97,14 +97,14 @@ public class SkipListsOrderBook<S> implements OrderBook<S> {
     @Override
     @GuardedBy("this")
     public List<Stock<S>> removeMostProfitableFirst(Stock<S> traded) {
-        List<Stock<S>> result = new ArrayList<Stock<S>>(0);
+        List<Stock<S>> result = new ArrayList<>(0);
 
         ConcurrentNavigableMap<BigDecimal, Stock<S>> matched = book.tailMap(traded.price).descendingMap();
 
         if (matched.size() > 0) {
 
             // first, find the result
-            result = new ArrayList<Stock<S>>(matched.size());
+            result = new ArrayList<>(matched.size());
             int totalSize = 0;
             for (Stock<S> bookOrder : matched.values()) {
                 if (totalSize >= traded.size) {
